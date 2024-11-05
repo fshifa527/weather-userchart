@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import './bootstrap.min.css'
+import React, { useRef } from 'react';
+import UserList from './components/UserList';
+import WeatherChart from './components/WeatherChart';
+import PDFExport from './components/PDFExport';
 
-function App() {
+const App = () => {
+  const userTableRef = useRef(null);
+  const weatherChartRef = useRef(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Weather Dashboard</h1>
+      <div ref={userTableRef}>
+        <h2>User List</h2>
+        <UserList />
+      </div>
+      <div ref={weatherChartRef}>
+        <h2>Weather Trends</h2>
+        <WeatherChart city="London" />
+      </div>
+      <PDFExport userTableRef={userTableRef} weatherChartRef={weatherChartRef} />
     </div>
   );
-}
+};
 
 export default App;
+
